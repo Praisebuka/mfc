@@ -10,7 +10,7 @@ class OrderBookController extends Controller
     public function globalOrdering()
     {
         try {
-            return "I am here";
+            return redirect('https://amazon.com');
             
         } catch (Throwable $th) {
             return $th->getMessage();
