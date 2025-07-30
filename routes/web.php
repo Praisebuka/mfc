@@ -14,7 +14,11 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 Route::prefix('/v1')->group(function () {
     Route::prefix('/orders')->group(function () {
         Route::get('/global', [OrderBookController::class, 'globalOrdering']);
+        Route::post('/local', [OrderBookController::class, 'localOrdering']);
     });
+
+
+
 });
 
 
