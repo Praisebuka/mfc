@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DonateCopy;
 use App\Mail\OrderPresale;
+use App\Models\DonateCopies;
 use App\Models\OrderPresaleForLocal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -26,17 +28,17 @@ class OrderBookController extends Controller
     {
         try {
 
-            $amount = $req->no_of_copies * 20000;
-
             $validatedData = $req->validate([
                 'no_of_copies' => 'required|integer',
                 'firstname' => 'required|string|max:255',
                 'email' => 'required|email|unique:order_presale_for_locals,email',
                 'phone' => 'required|string|max:255',
                 'city' => 'required|string|max:255',
-                $amount => 'required|integer',
                 'reference' => 'required|string',
             ]);
+
+            # Get total amount of book ordered
+            $validatedData['amount'] = $req->no_of_copies * 20000;
 
             $message = OrderPresaleForLocal::create($validatedData);
             Mail::to($req->email)->send(new OrderPresale($message));
@@ -48,28 +50,31 @@ class OrderBookController extends Controller
         }
     }
     
-
+    
     public function donateCopies(Request $req)
     {
         try {
 
             $validatedData = $req->validate([
-                'no_of_copies' => 'required|integer',
+                'no_of_copies' => 'required|integer|min:5',
                 'firstname' => 'required|string|max:255',
-                'email' => 'required|email|unique:order_presale_for_locals,email',
-                'phone' => 'required|string|max:255',
-                'city' => 'required|string|max:255',
+                'email' => 'required|email|unique:donate_copies,email',
+                'org_name' => 'nullable|string|max:255',
+                'country' => 'required|string|max:255',
+                'reference' => 'required|string',
             ]);
 
-            $message = OrderPresaleForLocal::create($validatedData);
-            Mail::to($req->email)->send(new OrderPresale($message));
+            # Get total amount of book ordered
+            $validatedData['amount'] = $req->no_of_copies * 20000;
+
+            $message = DonateCopies::create($validatedData);
+            Mail::to($req->email)->send(new DonateCopy($message));
             
-            return response()->json(['status' => 200, 'message' => 'Successfully placed an Order for MFC Presale']);
+            return response()->json(['status' => 200, 'message' => 'Successfully placed an Order to donate MFC Books']);
             
         } catch (Throwable $th) {
             return $th->getMessage();
         }
     }
-
 
 }
