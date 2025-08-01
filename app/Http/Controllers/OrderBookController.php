@@ -21,7 +21,35 @@ class OrderBookController extends Controller
         
     }
     
+
     public function localOrdering(Request $req)
+    {
+        try {
+
+            $amount = $req->no_of_copies * 20000;
+
+            $validatedData = $req->validate([
+                'no_of_copies' => 'required|integer',
+                'firstname' => 'required|string|max:255',
+                'email' => 'required|email|unique:order_presale_for_locals,email',
+                'phone' => 'required|string|max:255',
+                'city' => 'required|string|max:255',
+                $amount => 'required|integer',
+                'reference' => 'required|string',
+            ]);
+
+            $message = OrderPresaleForLocal::create($validatedData);
+            Mail::to($req->email)->send(new OrderPresale($message));
+            
+            return response()->json(['status' => 200, 'message' => 'Successfully placed an Order for MFC Presale']);
+            
+        } catch (Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+    
+
+    public function donateCopies(Request $req)
     {
         try {
 
