@@ -9,6 +9,9 @@ First Name:
 Number Of Copies:
 {{ $data->no_of_copies }}
 
+Amount:
+{{ $data->amount }}
+
 Email Address:
 {{ $data->email }}
 

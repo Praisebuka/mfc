@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('city');
             $table->integer('no_of_copies');
+            $table->integer('amount');
+            $table->string('reference');
             $table->timestamps();
         });
     }
