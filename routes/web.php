@@ -13,10 +13,12 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 
 Route::prefix('/v1')->group(function () {
     Route::prefix('/orders')->group(function () {
-        Route::get('/global', [OrderBookController::class, 'globalOrdering']);
-        Route::post('/local', [OrderBookController::class, 'localOrdering']);
+        Route::get('/global', [OrderBookController::class, 'globalOrdering'])->name('order globally');
+        Route::post('/local', [OrderBookController::class, 'localOrdering'])->name('order locally');
+        Route::post('/donate', [OrderBookController::class, 'donateCopies'])->name('donate a copy');
     });
 
+    Route::post('/book-session', [OrderBookController::class, 'bookASession'])->name('book a session');
 
 
 });
