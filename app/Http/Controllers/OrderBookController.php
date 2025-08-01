@@ -15,7 +15,7 @@ class OrderBookController extends Controller
     public function globalOrdering()
     {
         try {
-            return redirect('https://amazon.com');
+            return response()->json(['status' => 200, 'message' => 'Thank you for your purchase, kindly complete your order @amazon.com']);
             
         } catch (Throwable $th) {
             return $th->getMessage();
@@ -26,6 +26,7 @@ class OrderBookController extends Controller
 
     public function localOrdering(Request $req)
     {
+        dd(4882);
         try {
 
             $validatedData = $req->validate([
