@@ -26,7 +26,6 @@ class OrderBookController extends Controller
 
     public function localOrdering(Request $req)
     {
-        dd(4882);
         try {
 
             $validatedData = $req->validate([

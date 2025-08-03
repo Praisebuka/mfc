@@ -1,5 +1,0 @@
-@include('home.include.top')
-@include('home.include.header')
-@yield('homeContent')
-@include('home.include.footer')
-@include('home.include.footerjs')
