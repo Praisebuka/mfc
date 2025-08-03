@@ -70,7 +70,7 @@ class OrderBookController extends Controller
             $message = DonateCopies::create($validatedData);
             Mail::to($req->email)->send(new DonateCopy($message));
             
-            return response()->json(['status' => 200, 'message' => 'Successfully placed an Order to donate MFC Books']);
+            return response()->json(['status' => 201, 'message' => 'Successfully placed an Order to donate MFC Books']);
             
         } catch (Throwable $th) {
             return $th->getMessage();
