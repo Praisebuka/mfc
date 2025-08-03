@@ -43,7 +43,7 @@ class OrderBookController extends Controller
             $message = OrderPresaleForLocal::create($validatedData);
             Mail::to($req->email)->send(new OrderPresale($message));
             
-            return response()->json(['status' => 200, 'message' => 'Successfully placed an Order for MFC Presale']);
+            return response()->json(['status' => 201, 'message' => 'Successfully placed an Order for MFC Presale']);
             
         } catch (Throwable $th) {
             return $th->getMessage();
