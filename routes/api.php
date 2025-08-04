@@ -10,7 +10,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 Route::get('/', function () {
-    return response()->json([ 'status' => 'success', 'message' => 'MFC Version 1.0', 'data' => [ 'v1' => url('v1/'), 's' => $_SERVER['REMOTE_ADDR'], ]]);
+    return response()->json([ 'status' => 'success', 'message' => 'MFC Version 1.0', 'data' => [ 'v1' => url('api/v1/'), 's' => $_SERVER['REMOTE_ADDR'], ]]);
 });
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
