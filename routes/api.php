@@ -25,6 +25,7 @@ Route::prefix('/v1')->group(function () {
     });
 
     Route::post('/book-free-session', [BookSessionsController::class, 'bookFreeSession'])->name('book free session');
+    Route::post('/book-paid-session', [BookSessionsController::class, 'bookPaidSession'])->name('book paid session');
 
 
 });
