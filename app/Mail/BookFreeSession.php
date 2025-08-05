@@ -23,7 +23,7 @@ class BookFreeSession extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'My Family Companion - We will see you soon!',
+            subject: 'Welcome to "Ask Dr. OVO" Family Health Q&A',
         );
     }
 

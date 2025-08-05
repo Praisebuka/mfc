@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('book_free_sessions', function (Blueprint $table) {
-            $table->uuid();
+            $table->id();
             $table->string('name');
             $table->string('email');
             $table->string('country');

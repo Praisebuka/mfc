@@ -18,7 +18,7 @@ class BookSessionsController extends Controller
             # Validate data entries from FE
             $validatedData = $req->validate([
                 'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:book_free_sessions,email',
+                'email' => 'required|email',
                 'country' => 'required|string|max:255',
             ]);
 
