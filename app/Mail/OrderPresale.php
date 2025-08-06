@@ -24,7 +24,7 @@ class OrderPresale extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'My Family Companion - Thank You For Your Purchase',
+            subject: 'Thank You for Pre-ordering My Family Companion! 💙',
         );
     }
 

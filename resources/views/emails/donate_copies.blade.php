@@ -1,33 +1,15 @@
 
 <x-mail::message>
-# Hello Ms/Mr {{ $data->firstname }}
-Thank you for your purchase of our Presale
+# Dear {{ $data->firstname }}
+Thank you for your donation. My Family Companion was birthed out of a passion to curb preventable diseases and mortalities in families and communities in Africa and other parts of the world. 
 
-First Name:
-{{ $data->firstname }}
+Each copy donated is a family helped and a life saved. Thank you for partnering with our vision.
 
-Number Of Copies:
-{{ $data->no_of_copies }}
+Within the next 3 working days, we will process your Certificate of Donation and any other due appreciations.
 
-Amount:
-{{ $data->amount }}
+With warmth
 
-Email Address:
-{{ $data->email }}
-
-Organisation Name
-{{ $data->org_name }}
-
-Where you are:
-{{ $data->country }}
-
-Payment Reference:
-{{ $data->reference }}
-
-<x-mail::button :url="'mailto:contact@myfamilycompanion.com'">
-Contact Our Support
-</x-mail::button>
-
-Thanks,<br>
-{{ config('app.name') }}
+Otubo Victor<br>
+Author, MFC<br>
+{{ config('app.url') }}
 </x-mail::message>
