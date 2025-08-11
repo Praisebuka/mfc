@@ -58,7 +58,7 @@ class OrderBookController extends Controller
             $validatedData = $req->validate([
                 'no_of_copies' => 'required|integer|min:5',
                 'firstname' => 'required|string|max:255',
-                'email' => 'required|email|unique:donate_copies,email',
+                'email' => 'required|email',
                 'org_name' => 'nullable|string|max:255',
                 'country' => 'required|string|max:255',
                 'reference' => 'required|string',
