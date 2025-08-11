@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\DonateCopy;
 use App\Mail\OrderPresale;
 use App\Models\DonateCopies;
+use App\Models\OrderPresaleForGlobal;
 use App\Models\OrderPresaleForLocal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -12,13 +13,24 @@ use Throwable;
 
 class OrderBookController extends Controller
 {
-    public function globalOrdering()
+    public function globalOrdering(Request $req)
     {
         try {
-            return response()->json(['status' => 200, 'message' => 'Thank you for your purchase, kindly complete your order @amazon.com']);
+
+            $validatedData = $req->validate([
+                'firstname' => 'required|string|max:255',
+                'email' => 'required|email|unique:order_presale_for_globals,email',
+                'phone' => 'required|string|max:255',
+                'country' => 'required|string|max:255',
+            ]);
+
+            $message = OrderPresaleForGlobal::create($validatedData);
+            Mail::to($req->email)->send(new OrderPresale($message));
+            
+            return response()->json(['status' => 201, 'message' => 'Successfully placed an Order for MFC Presale']);
             
         } catch (Throwable $th) {
-            return $th->getMessage();
+            return response()->json(['status' => 500, 'message' => $th->getMessage()]);
         }
         
     }
