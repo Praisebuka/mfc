@@ -16,6 +16,8 @@ PIN the Channels so you don't miss anything!
 WhatsApp Channel
 </x-mail::button>
 
+<p style="text-align: center;margin:unset"> & </p>
+
 <x-mail::button :url="'https://t.me/myfamilycompanion'">
 Telegram Channel
 </x-mail::button>

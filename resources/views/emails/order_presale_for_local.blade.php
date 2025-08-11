@@ -7,7 +7,7 @@ Now, join Dr. OVO to ask your health questions that affect you or your family he
 
 <x-mail::button :url="'https://www.whatsapp.com/channel/0029VbB0G3AEKyZDnb8juE46'"> WhatsApp Channel </x-mail::button>
 
-&
+<p style="text-align: center;margin:unset"> & </p>
 
 <x-mail::button :url="'https://t.me/myfamilycompanion'"> Telegram Channel </x-mail::button>
 
@@ -23,7 +23,7 @@ I’m the meantime, remember to join Dr. OVO every week for family health Q&A on
 
 <x-mail::button :url="'https://www.whatsapp.com/channel/0029VbB0G3AEKyZDnb8juE46'"> WhatsApp Channel </x-mail::button>
 
-&
+<p style="text-align: center;margin:unset"> & </p>
 
 <x-mail::button :url="'https://t.me/myfamilycompanion'"> Telegram Channel </x-mail::button>
 
