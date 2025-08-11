@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('donate_copies', function (Blueprint $table) {
             $table->id();
             $table->string('firstname');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('org_name')->nullable();
             $table->string('country');
             $table->integer('no_of_copies');
