@@ -17,6 +17,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamps();
         });
+
+        Schema::create('invite_to_events', function (Blueprint $table) {
+            $table->id();
+            $table->string('firstname');
+            $table->string('email');
+            $table->string('event_name');
+            $table->longText('event_details');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -25,5 +34,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('newsletters');
+        Schema::dropIfExists('invite_to_events');
     }
 };
