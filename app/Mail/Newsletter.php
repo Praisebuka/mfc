@@ -31,7 +31,7 @@ class Newsletter extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.newsletter.blade',
+            markdown: 'emails.newsletter',
         );
     }
 
