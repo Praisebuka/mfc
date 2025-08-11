@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookSessionsController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderBookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::prefix('/v1')->group(function () {
 
     Route::post('/book-free-session', [BookSessionsController::class, 'bookFreeSession'])->name('book free session');
     Route::post('/book-paid-session', [BookSessionsController::class, 'bookPaidSession'])->name('book paid session');
+
+    # Subscribe to our newsletter
+    Route::post('/subscribe-newsletter', [NewsletterController::class, 'subscribe'])->name('subscribe to our newsletter');
 
 
 });
