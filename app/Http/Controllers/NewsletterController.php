@@ -61,14 +61,14 @@ class NewsletterController extends Controller
         try {
 
             $validatedData = $req->validate([
-                'firstname' => 'nullable|string|max:255',
+                'name' => 'nullable|string|max:255',
                 'email' => 'required|email|unique:count_down_newsletters,email',
             ]);
 
             $message = CountDownNewsletter::create($validatedData);
             Mail::to($req->email)->send(new MailCountDownNewsletter($message));
             
-            return response()->json(['status' => 201, 'message' => 'Thank you '. $req->firstname .', You have successfully subscribed to our newsletter.']);
+            return response()->json(['status' => 201, 'message' => 'Thank you '. $req->name ? : 'there' .', You have successfully subscribed to our newsletter and you will be notified.']);
             
         } catch (Throwable $th) {
             return response()->json(['status' => 500, 'message' => $th->getMessage()]);

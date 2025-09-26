@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('count_down_newsletters', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname')->nullable();
+            $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->timestamps();
         });
