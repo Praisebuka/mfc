@@ -30,6 +30,9 @@ Route::prefix('/v1')->group(function () {
 
     # Subscribe to our newsletter
     Route::post('/subscribe-newsletter', [NewsletterController::class, 'subscribe'])->name('subscribe to our newsletter');
+
+    # The timer count down newsletter
+    Route::post('/subscribe-timer-newsletter', [NewsletterController::class, 'subscribeTimer'])->name('subscribe to our timer newsletter');
     
     # Invite to Speak
     Route::post('/invite', [NewsletterController::class, 'inviteToSpeak'])->name('invite to speak');
