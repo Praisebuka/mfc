@@ -28,4 +28,18 @@ class ResetPasswordRequest extends FormRequest
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
+
+    /**
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'token.required' => 'The password reset token is required.',
+            'email.required' => 'Please provide your email address.',
+            'email.email' => 'Please provide a valid email address.',
+            'password.required' => 'Please provide a new password.',
+            'password.confirmed' => 'The password confirmation does not match.',
+        ];
+    }
 }

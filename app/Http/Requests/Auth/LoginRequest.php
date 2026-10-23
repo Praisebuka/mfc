@@ -34,6 +34,18 @@ class LoginRequest extends FormRequest
     }
 
     /**
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Please provide your email address.',
+            'email.email' => 'Please provide a valid email address.',
+            'password.required' => 'Please provide your password.',
+        ];
+    }
+
+    /**
      * Ensure the login request is not rate limited.
      *
      * @throws ValidationException

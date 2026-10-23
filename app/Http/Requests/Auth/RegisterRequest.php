@@ -29,4 +29,23 @@ class RegisterRequest extends FormRequest
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ];
     }
+
+    /**
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Please provide your name.',
+            'name.string' => 'Your name must be text.',
+            'email.required' => 'Please provide your email address.',
+            'email.email' => 'Please provide a valid email address.',
+            'email.unique' => 'An account with this email address already exists.',
+            'phone_no.required' => 'Please provide your phone number.',
+            'phone_no.regex' => 'Your phone number must contain 10 to 15 digits only.',
+            'phone_no.unique' => 'An account with this phone number already exists.',
+            'password.required' => 'Please provide a password.',
+            'password.confirmed' => 'The password confirmation does not match.',
+        ];
+    }
 }
