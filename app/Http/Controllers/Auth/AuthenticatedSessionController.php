@@ -4,35 +4,45 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\UserResource;
+use App\Services\AuthService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): Response
+    public function store(LoginRequest $request, AuthService $auth): JsonResponse
     {
-        $request->authenticate();
+        $request->ensureIsNotRateLimited();
 
-        $request->session()->regenerate();
+        $user = $auth->authenticate(
+            (string) $request->input('email'),
+            (string) $request->input('password')
+        );
 
-        return response()->noContent();
+        if (! $user) {
+            $request->recordFailedAttempt();
+
+            return response()->json(['message' => __('auth.failed')], 422);
+        }
+
+        $request->clearFailedAttempts();
+
+        return response()->json([
+            'token' => $auth->issueToken($user),
+            'data' => UserResource::make($user)->resolve($request),
+        ]);
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): Response
+    public function destroy(Request $request, AuthService $auth): JsonResponse
     {
-        Auth::guard('web')->logout();
+        $auth->logout($request->user());
 
-        $request->session()->invalidate();
+        if ($request->hasSession()) {
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
 
-        $request->session()->regenerateToken();
-
-        return response()->noContent();
+        return response()->json(['message' => 'Logged out successfully.']);
     }
 }
