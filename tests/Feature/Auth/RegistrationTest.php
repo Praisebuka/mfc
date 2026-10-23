@@ -70,4 +70,39 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password',
         ])->assertUnprocessable()->assertJsonValidationErrors('phone_no');
     }
+
+    public function test_empty_registration_body_returns_field_errors_as_json_without_accept_header(): void
+    {
+        $response = $this->post('/api/v1/auth/register', [], [
+            'Accept' => 'text/html',
+        ]);
+
+        $response->assertUnprocessable()
+            ->assertHeader('content-type', 'application/json')
+            ->assertJsonValidationErrors(['name', 'email', 'phone_no', 'password'])
+            ->assertJsonPath('errors.name.0', 'Please provide your name.')
+            ->assertJsonPath('errors.email.0', 'Please provide your email address.')
+            ->assertJsonPath('errors.phone_no.0', 'Please provide your phone number.')
+            ->assertJsonPath('errors.password.0', 'Please provide a password.');
+    }
+
+    public function test_get_request_to_registration_endpoint_returns_json_method_error(): void
+    {
+        $this->get('/api/v1/auth/register')
+            ->assertStatus(405)
+            ->assertHeader('content-type', 'application/json')
+            ->assertExactJson([
+                'message' => 'The HTTP method is not allowed for this API endpoint.',
+            ]);
+    }
+
+    public function test_unknown_api_endpoint_returns_json_not_found_error(): void
+    {
+        $this->get('/api/v1/auth/not-a-route')
+            ->assertNotFound()
+            ->assertHeader('content-type', 'application/json')
+            ->assertExactJson([
+                'message' => 'The requested API endpoint was not found.',
+            ]);
+    }
 }
