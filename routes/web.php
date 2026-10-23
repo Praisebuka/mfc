@@ -42,6 +42,3 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 
 //     return (new SendQuickMSG($data))->render();
 // });
-
-
-require __DIR__.'/auth.php';

@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
+Route::prefix('v1/auth')->group(base_path('routes/auth.php'));
 
 Route::prefix('/v1')->group(function () {
     Route::prefix('/orders')->group(function () {
@@ -39,5 +40,4 @@ Route::prefix('/v1')->group(function () {
 
 
 });
-
 
